@@ -16,7 +16,7 @@ public class Keypad : Interactable
         
     }
 
-    protected override void Interact() 
+    protected override void Interact()
     {
         base.Interact();
     }

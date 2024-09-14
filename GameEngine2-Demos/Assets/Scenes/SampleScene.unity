@@ -1559,7 +1559,8 @@ GameObject:
   - component: {fileID: 1721238270}
   - component: {fileID: 1721238269}
   - component: {fileID: 1721238268}
-  m_Layer: 0
+  - component: {fileID: 1721238272}
+  m_Layer: 6
   m_Name: Keypad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1652,6 +1653,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1721238272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1721238267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fba00b6e181c2e4197b6a1c9fa9c00d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1882575597
 GameObject:
   m_ObjectHideFlags: 0
@@ -1863,7 +1876,7 @@ MonoBehaviour:
   distance: 3
   mask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
 --- !u!1 &2061634730
 GameObject:
   m_ObjectHideFlags: 0
@@ -2046,7 +2059,7 @@ SceneRoots:
   - {fileID: 8210247342364799331}
   - {fileID: 756940435}
   - {fileID: 75315}
+  - {fileID: 1721238271}
   - {fileID: 1894857456}
   - {fileID: 420634987}
   - {fileID: 559807956}
-  - {fileID: 1721238271}

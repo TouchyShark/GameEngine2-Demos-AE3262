@@ -20,4 +20,4 @@ public class Keypad : Interactable
     {
         base.Interact();
     }
-}
+} 

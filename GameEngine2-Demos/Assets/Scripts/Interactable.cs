@@ -13,7 +13,7 @@ public abstract class Interactable : MonoBehaviour
         Interact();
     }
     
-    public virtual void Interact() 
+    protected virtual void Interact() 
     {
         //we wont have any code written in this function
         //this is a template function to be overrident by our subclasses

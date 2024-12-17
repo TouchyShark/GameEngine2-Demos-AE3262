@@ -12,6 +12,9 @@ public class PlayerHealth : MonoBehaviour
     public Image frontHelathBar;
     public Image backHelathBar;
 
+    public GameManager gameManager;
+    private bool isDead;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +33,13 @@ public class PlayerHealth : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.S))
         {
             RestoreHealth(Random.Range(5, 10));
+        }
+
+        if(health <= 0 && !isDead) 
+        {
+            isDead = true;
+            gameManager.GameOver();
+            Debug.Log("Dead");
         }
     }
     public void UpdateHealthUI()

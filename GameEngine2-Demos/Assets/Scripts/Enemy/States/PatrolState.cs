@@ -1,41 +1,59 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PatrolState : BaseState
 {
-    //track which waypoint we are currently targeting.
-    public int waypointIndex;
-    public float waitTimer;
+    private int waypointIndex;
+    private float waitTimer;
+
     public override void Enter()
     {
+        Debug.Log("Entering PatrolState");
+
+        // Set the first waypoint if there are waypoints defined
+        if (enemy.path.waypoints.Count > 0)
+        {
+            waypointIndex = 0;
+            enemy.Agent.SetDestination(enemy.path.waypoints[waypointIndex].position);
+        }
+        else
+        {
+            Debug.LogWarning("No waypoints defined in the enemy's path!");
+        }
     }
 
     public override void Perform()
     {
+        // Patrol logic
         PatrolCycle();
-        if (enemy.CanSeePlayer()) 
+
+        // Transition to AttackState if the player is spotted
+        if (enemy.CanSeePlayer())
         {
             stateMachine.ChangeState(new AttackState());
         }
     }
+
     public override void Exit()
     {
+        Debug.Log("Exiting PatrolState");
     }
 
-    public void PatrolCycle() 
+    private void PatrolCycle()
     {
-        waitTimer += Time.deltaTime;
-        if(waitTimer > 3) 
+        // Ensure there are waypoints to patrol
+        if (enemy.path.waypoints.Count == 0) return;
+
+        // Check if the enemy has reached the current waypoint
+        if (enemy.Agent.remainingDistance < 0.5f && !enemy.Agent.pathPending)
         {
-            if (enemy.Agent.remainingDistance < 0.2f)
+            waitTimer += Time.deltaTime;
+
+            if (waitTimer > 3f) // Wait for 3 seconds before moving to the next waypoint
             {
-                if (waypointIndex < enemy.path.waypoints.Count - 1)
-                    waypointIndex++;
-                else
-                    waypointIndex = 0;
+                // Move to the next waypoint (loop back to the first after the last)
+                waypointIndex = (waypointIndex + 1) % enemy.path.waypoints.Count;
                 enemy.Agent.SetDestination(enemy.path.waypoints[waypointIndex].position);
-                waitTimer = 0;
+                waitTimer = 0f; // Reset the wait timer
             }
         }
     }

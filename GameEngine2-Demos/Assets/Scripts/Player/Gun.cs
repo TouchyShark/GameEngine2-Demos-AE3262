@@ -5,16 +5,16 @@ using TMPro;
 
 public class Gun : MonoBehaviour
 {
-    public GameObject bullet;
+    public GameObject bulletPrefab;
     public float shootForce, upwardForce;
 
     public float timeBetweenShooting, spread, reloadTime, timeBetweenShots;
-    public int magzineSize, bulletsPerTap;
+    public int magazineSize, bulletsPerTap;
     public bool allowButtonHold;
 
-    int bulletsLeft, bulletsShot;
+    private int bulletsLeft, bulletsShot;
 
-    bool shooting, readyToShoot, reloading;
+    private bool shooting, readyToShoot, reloading;
 
     public Camera fpsCam;
     public Transform attackPoint;
@@ -26,45 +26,55 @@ public class Gun : MonoBehaviour
 
     private void Awake()
     {
-        bulletsLeft = magzineSize;
+        bulletsLeft = magazineSize;
         readyToShoot = true;
     }
 
     private void Update()
     {
-        MyInput();
+        HandleInput();
 
         if (ammunitionDisplay != null)
-            ammunitionDisplay.SetText(bulletsLeft / bulletsPerTap + " / " + magzineSize / bulletsPerTap);
+            ammunitionDisplay.SetText(bulletsLeft + " / " + magazineSize);
     }
-    private void MyInput() 
+
+    private void HandleInput()
     {
-        if (allowButtonHold) shooting = Input.GetKey(KeyCode.Mouse0);
-        else shooting = Input.GetKeyDown(KeyCode.Mouse0);
+        if (allowButtonHold)
+            shooting = Input.GetKey(KeyCode.Mouse0);
+        else
+            shooting = Input.GetKeyDown(KeyCode.Mouse0);
 
-        if (Input.GetKeyDown(KeyCode.R) && bulletsLeft < magzineSize && !reloading) Reload();
+        // Reloading
+        if (Input.GetKeyDown(KeyCode.R) && !reloading && bulletsLeft < magazineSize)
+        {
+            Reload();
+            return;
+        }
 
-        if (readyToShoot && shooting && !reloading && bulletsLeft <= 0)
 
-       if (readyToShoot && shooting && !reloading && bulletsLeft > 0) Reload();
+        // Shooting
+        if (readyToShoot && shooting && !reloading && bulletsLeft > 0)
         {
             bulletsShot = 0;
-
             Shoot();
         }
+
+        // Out of ammo
+        if (bulletsLeft <= 0 && shooting)
+        {
+            Debug.Log("Out of bullets! Reload required.");
+        }
     }
+
     private void Shoot()
     {
         readyToShoot = false;
+
+        // Calculate direction with spread
         Ray ray = fpsCam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         RaycastHit hit;
-
-        Vector3 targetPoint;
-        if (Physics.Raycast(ray, out hit))
-            targetPoint = hit.point;
-        else
-            targetPoint = ray.GetPoint(75);
-
+        Vector3 targetPoint = Physics.Raycast(ray, out hit) ? hit.point : ray.GetPoint(75);
         Vector3 directionWithoutSpread = targetPoint - attackPoint.position;
 
         float x = Random.Range(-spread, spread);
@@ -72,41 +82,64 @@ public class Gun : MonoBehaviour
 
         Vector3 directionWithSpread = directionWithoutSpread + new Vector3(x, y, 0);
 
-        GameObject currentBullet = Instantiate(bullet, attackPoint.position, Quaternion.identity);
-
+        // Instantiate bullet and apply forces
+        GameObject currentBullet = Instantiate(bulletPrefab, attackPoint.position, Quaternion.identity);
         currentBullet.transform.forward = directionWithSpread.normalized;
 
-        currentBullet.GetComponent<Rigidbody>().AddForce(directionWithSpread.normalized * shootForce, ForceMode.Impulse);
-        currentBullet.GetComponent<Rigidbody>().AddForce(fpsCam.transform.up * upwardForce, ForceMode.Impulse);
+        Rigidbody bulletRb = currentBullet.GetComponent<Rigidbody>();
+        bulletRb.AddForce(directionWithSpread.normalized * shootForce, ForceMode.Impulse);
+        bulletRb.AddForce(fpsCam.transform.up * upwardForce, ForceMode.Impulse);
 
+        // Muzzle flash
         if (muzzleFlash != null)
             Instantiate(muzzleFlash, attackPoint.position, Quaternion.identity);
+
+        // Check for collision and apply damage
+        if (hit.collider != null)
+        {
+            EnemyHealth enemyHealth = hit.collider.GetComponent<EnemyHealth>();
+            if (enemyHealth != null)
+            {
+                enemyHealth.TakeDamage(10); // Apply 10 damage
+                Debug.Log("Enemy hit!");
+            }
+        }
 
         bulletsLeft--;
         bulletsShot++;
 
-        if (allowInvoke) 
+        Rigidbody bullet = currentBullet.GetComponent<Rigidbody>();
+        if (bulletRb == null)
+        {
+            Debug.LogError("Bullet prefab is missing Rigidbody!");
+            return;  // Exit early or handle the error appropriately
+        }
+
+
+        // Reset shot after delay
+        if (allowInvoke)
         {
             Invoke("ResetShot", timeBetweenShooting);
             allowInvoke = false;
         }
     }
 
-    private void ResetShot() 
+    private void ResetShot()
     {
         readyToShoot = true;
         allowInvoke = true;
     }
 
-    private void Reload() 
+    private void Reload()
     {
         reloading = true;
+        Debug.Log("Reloading...");
         Invoke("ReloadFinished", reloadTime);
     }
 
-    private void ReloadFinished() 
+    private void ReloadFinished()
     {
-        bulletsLeft = magzineSize;
+        bulletsLeft = magazineSize;
         reloading = false;
     }
 }

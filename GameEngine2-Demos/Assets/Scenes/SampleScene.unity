@@ -461,6 +461,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 119722020}
+  - component: {fileID: 119722021}
   m_Layer: 0
   m_Name: GunBarrel (1)
   m_TagString: Untagged
@@ -477,12 +478,40 @@ Transform:
   m_GameObject: {fileID: 119722019}
   serializedVersion: 2
   m_LocalRotation: {x: 0.013648987, y: -0.95502037, z: 0.034989834, w: 0.29415232}
-  m_LocalPosition: {x: 0.12, y: -0.233, z: 1.647}
+  m_LocalPosition: {x: 0.066, y: -0.176, z: 1.683}
   m_LocalScale: {x: 0.49999994, y: 0.50000006, z: 0.5}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 215340941}
   m_Father: {fileID: 1806293646}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &119722021
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 119722019}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &126208483
 GameObject:
   m_ObjectHideFlags: 0
@@ -577,6 +606,43 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &215340940 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 7d355e11fa8d84645ab4854f26db8c2b, type: 3}
+  m_PrefabInstance: {fileID: 1728371060}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &215340941 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 7d355e11fa8d84645ab4854f26db8c2b, type: 3}
+  m_PrefabInstance: {fileID: 1728371060}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &215340944
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 215340940}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 2
 --- !u!1 &245705989
 GameObject:
   m_ObjectHideFlags: 0
@@ -1916,7 +1982,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: cf2e58873779b8849a93bf985e2ea902, type: 3}
       insertIndex: 0
       addedObject: {fileID: 1754081904}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: cf2e58873779b8849a93bf985e2ea902, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1546100374}
   m_SourcePrefab: {fileID: 100100000, guid: cf2e58873779b8849a93bf985e2ea902, type: 3}
 --- !u!1 &705507993
 GameObject:
@@ -3739,6 +3808,24 @@ Camera:
   m_CorrespondingSourceObject: {fileID: 5892076891590196594, guid: feae71bd4c07fed45bcd94552a764cf5, type: 3}
   m_PrefabInstance: {fileID: 8210247342364799331}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1546100371 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: cf2e58873779b8849a93bf985e2ea902, type: 3}
+  m_PrefabInstance: {fileID: 668950079}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1546100374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1546100371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4906eaea55119c44a97291468d172e8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
 --- !u!1001 &1626685592
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3828,19 +3915,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17cdf592fe269b7409fe29138127cb50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 3894947046331105645, guid: a7b89315c9575634881bebd841aef8fe, type: 3}
-  shootForce: 300
+  bulletPrefab: {fileID: 215340940}
+  shootForce: 300.8
   upwardForce: 0
   timeBetweenShooting: 0.1
   spread: 3
   reloadTime: 1.5
-  timeBetweenShots: 0
-  magzineSize: 100
+  timeBetweenShots: 0.1
+  magazineSize: 100
   bulletsPerTap: 1
   allowButtonHold: 1
   fpsCam: {fileID: 1543361018}
-  attackPoint: {fileID: 119722020}
-  muzzleFlash: {fileID: 0}
+  attackPoint: {fileID: 215340941}
+  muzzleFlash: {fileID: 119722019}
   ammunitionDisplay: {fileID: 323483173}
   allowInvoke: 1
 --- !u!1 &1721238267
@@ -3992,6 +4079,70 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!1001 &1728371060
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 119722020}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 7d355e11fa8d84645ab4854f26db8c2b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.012
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7d355e11fa8d84645ab4854f26db8c2b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7d355e11fa8d84645ab4854f26db8c2b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7d355e11fa8d84645ab4854f26db8c2b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.008792281
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7d355e11fa8d84645ab4854f26db8c2b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.005485188
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7d355e11fa8d84645ab4854f26db8c2b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.99714035
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7d355e11fa8d84645ab4854f26db8c2b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.07485908
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7d355e11fa8d84645ab4854f26db8c2b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 8.591
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7d355e11fa8d84645ab4854f26db8c2b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180.968
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7d355e11fa8d84645ab4854f26db8c2b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -0.558
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 7d355e11fa8d84645ab4854f26db8c2b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: be80d4faac8758345875b9c062be5a88, type: 2}
+    - target: {fileID: 919132149155446097, guid: 7d355e11fa8d84645ab4854f26db8c2b, type: 3}
+      propertyPath: m_Name
+      value: Bullet_Pistol
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7d355e11fa8d84645ab4854f26db8c2b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 215340944}
+  m_SourcePrefab: {fileID: 100100000, guid: 7d355e11fa8d84645ab4854f26db8c2b, type: 3}
 --- !u!1 &1754081903
 GameObject:
   m_ObjectHideFlags: 0
@@ -4531,7 +4682,7 @@ MonoBehaviour:
   speed: 5
   gravity: -9.8
   jumpHright: 1.5
-  crouching: 0
+  crouching: 1
   lerpCrouch: 0
   crouchTimer: 1
   sprinting: 0
